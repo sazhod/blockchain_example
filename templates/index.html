@@ -1,26 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <button id='connectWallet' onclick="connectWalletwithMetaMask()">Connect Wallet</button>
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ super() }}
+    {% if session['public_key'] %}
+        <button id='connectWallet' onclick="signout()">Change Wallet</button>
+        balance = {{ token_balance }} {{ token_symbol }}
+
+    {% else %}
+    <button id='connectWallet' onclick="signout()">Connect Wallet</button>
+    <p>Авторизуйтесь чтобы просматривать баланс</p>
+    {% endif %}
     <script>
-        async function connectWalletwithMetaMask() {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        .catch((e) => {
-        console.error(e.message)
-        return
-        })
-
-        if (!accounts) { return }
-        var base_url = window.location.origin;
-
-        window.location.replace(base_url + "/?public_key="+accounts[0]);
-        
-      }
-
+        function signout() {
+            if (window.ethereum) {
+              window.ethereum
+                .request({
+                  method: "wallet_requestPermissions",
+                  params: [
+                    {
+                      eth_accounts: {},
+                    },
+                  ],
+                })
+                .then(() => {
+                    public_key = window.ethereum.selectedAddress;
+                    var base_url = window.location.origin;
+                    window.location.replace(base_url + "/?public_key="+public_key);
+                });
+            }
+          }
     </script>
-</body>
-</html>
+{% endblock %}
