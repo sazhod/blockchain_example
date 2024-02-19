@@ -26,8 +26,59 @@ async function main() {
 }
 
 // We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+// // and properly handle errors.
+// main().catch((error) => {
+//   console.error(error);
+//   process.exitCode = 1;
+// });
+
+async function main1() {
+  // const token_contract = await hre.ethers.deployContract("Lock", [unlockTime], {
+  //   value: lockedAmount,
+  // });
+  // console.log(her.ethers.)
+  const token_contract = await hre.ethers.deployContract("TokenContract");
+  console.log(token_contract)
+  console.log("Contract address");
+
+  const token_contract2 = await hre.ethers.deployContract("TokenContract2");
+  console.log(token_contract2);
+  console.log("Contract address");
+}
+
+
+// main1().catch((error) => {
+//   console.error(error);
+//   process.exitCode = 1;
+// });
+
+async function main2() {
+  const [deployer] = await hre.ethers.getSigners();
+  console.log('Deploying contracts with the account: ' + deployer.address);
+  console.log(hre.ethers.version);
+  // // Deploy First
+  // const First = await ethers.getContractFactory('Lock');
+  // const first = await First.deploy();
+
+  // Deploy Second
+  const First = await hre.ethers.getContractFactory('TokenContract');
+  const first = await First.deploy();
+  await first.waitForDeployment();
+  
+  console.log( "Second: " + first.address );
+  console.log( "Second: " + first); 
+
+  const Second = await hre.ethers.getContractFactory('TokenContract2');
+  const second = await Second.deploy();
+  second.waitForDeployment();
+  
+  console.log( "Second: " + second.address );
+  console.log( "Second: " + second); 
+}
+
+main2()
+  .then(() => process.exit())
+  .catch(error => {
+      console.error(error);
+      process.exit(1);
+})

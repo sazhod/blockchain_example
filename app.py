@@ -17,7 +17,7 @@ w3 = Web3(Web3.HTTPProvider(HARDHAT_URL))
 with open('abi.json') as file:
     abi = json.load(file)
 
-contract_address = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
+contract_address = '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318'
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -29,7 +29,7 @@ def index():
     if request.method == 'POST':
         session.pop('public_key')
 
-    token_balance = 'Авторизуйтесь для получения баланса.'
+    token_balance = ''
     token_symbol = ''
 
     if 'public_key' in session:
