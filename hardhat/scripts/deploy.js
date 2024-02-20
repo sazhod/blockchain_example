@@ -6,6 +6,7 @@
 // global scope, and execute the script.
 const hre = require("hardhat");
 
+
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const unlockTime = currentTimestampInSeconds + 60;
@@ -52,33 +53,3 @@ async function main1() {
 //   process.exitCode = 1;
 // });
 
-async function main2() {
-  const [deployer] = await hre.ethers.getSigners();
-  console.log('Deploying contracts with the account: ' + deployer.address);
-  console.log(hre.ethers.version);
-  // // Deploy First
-  // const First = await ethers.getContractFactory('Lock');
-  // const first = await First.deploy();
-
-  // Deploy Second
-  const First = await hre.ethers.getContractFactory('TokenContract');
-  const first = await First.deploy();
-  await first.waitForDeployment();
-  
-  console.log( "Second: " + first.address );
-  console.log( "Second: " + first); 
-
-  const Second = await hre.ethers.getContractFactory('TokenContract2');
-  const second = await Second.deploy();
-  second.waitForDeployment();
-  
-  console.log( "Second: " + second.address );
-  console.log( "Second: " + second); 
-}
-
-main2()
-  .then(() => process.exit())
-  .catch(error => {
-      console.error(error);
-      process.exit(1);
-})

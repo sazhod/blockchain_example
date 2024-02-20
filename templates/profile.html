@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    {% if session['public_key'] %}
+        <p>Адрес в сети: {{ session['public_key'] }}</p>
+        <p>Баланс: {{  }} PROFI</p>
+    {% else %}
+
 {% endblock %}
