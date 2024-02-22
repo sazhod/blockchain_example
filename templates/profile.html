@@ -3,8 +3,17 @@
 {% block content %}
 
     {% if session['public_key'] %}
-        <p>Адрес в сети: {{ session['public_key'] }}</p>
-        <p>Баланс: {{  }} PROFI</p>
+        <p>Адрес в сети: {{ public_key }}</p>
+        <p>Баланс: {{ token_balance }} {{ token_symbol }}</p>
+        <p>Купленные ассеты: </p>
+        <p>Реферальный код: {{ ref_code }}</p>
+        <p>Процент скидки: </p>
+        <p>Реферальный код друга: <input/> </p>
+        <form method="post">
+            <input type="hidden" value="remove_public_key">
+            <button type="submit">Выход</button>
+        </form>
     {% else %}
-
+        <p>Авторизуйтесь!</p>
+    {% endif %}
 {% endblock %}

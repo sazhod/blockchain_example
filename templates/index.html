@@ -4,7 +4,6 @@
     {{ super() }}
     {% if session['public_key'] %}
         <button id='connectWallet' onclick="signout()">Change Wallet</button>
-        balance = {{ token_balance }} {{ token_symbol }}
 
     {% else %}
     <button id='connectWallet' onclick="signout()">Connect Wallet</button>
