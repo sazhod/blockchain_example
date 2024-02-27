@@ -1,0 +1,47 @@
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            {% if session['public_key'] %}
+            <a class="nav-link active" aria-current="page" href="/profile">Профиль</a>
+            {% else %}
+            <button class="nav-link active" aria-current="page" onclick="signout()">Авторизоваться</a>
+
+            {% endif %}
+          </li>
+          <li class="nav-item">
+
+            <a class="nav-link active" aria-current="page" href="/marketplace">Торговая площадка</a>
+
+          </li>
+      </div>
+    </div>
+  </nav>
+  <script>
+    function signout() {
+        if (window.ethereum) {
+          window.ethereum
+            .request({
+              method: "wallet_requestPermissions",
+              params: [
+                {
+                  eth_accounts: {},
+                },
+              ],
+            })
+            .then(() => {
+                public_key = window.ethereum.selectedAddress;
+                var base_url = window.location.origin;
+                window.location.replace(base_url + "/?public_key="+public_key);
+            });
+        }
+      }
+</script>
+{% endblock %}

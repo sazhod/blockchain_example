@@ -3,29 +3,18 @@ import datetime
 from tokenize import tokenize
 
 from flask import Flask, render_template, request, redirect, session, url_for
-from web3 import Web3
-import json
-
+from utils import *
 
 app = Flask(__name__)
 app.debug = True
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-
-HARDHAT_URL = r"http://127.0.0.1:8545/"
-
-w3 = Web3(Web3.HTTPProvider(HARDHAT_URL))
-
-with open('abi.json') as file:
-    abi = json.load(file)
-
-contract_address = '0xb409013acE408Bf661E232Fc181297371f45F633'
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET' and request.args.get('public_key'):
         session['public_key'] = request.args.get('public_key')
-        return redirect(url_for('index'))
+        return redirect(url_for('profile'))
 
     if request.method == 'POST':
         session.pop('public_key')
@@ -53,24 +42,13 @@ def profile():
     return render_template('index.html')
 
 
-def create_ref_code(symbol, public_key, year):
-    return f'{symbol} - {public_key[2:6]}{year}'
+@app.route('/marketplace', methods=['GET', 'POST'])
+def marketplace():
+    is_owner = False
+    if 'public_key' in session and session['public_key'] == get_owner():
+        is_owner = True
 
-
-def get_contract():
-    return w3.eth.contract(address=contract_address, abi=abi)
-
-
-def get_checksum_address(public_key):
-    return w3.to_checksum_address(public_key)
-
-
-def get_token_balance(contract, checksum_address):
-    return contract.functions.balanceOf(checksum_address).call()
-
-
-def get_token_symbol(contract):
-    return contract.functions.symbol().call()
+    return render_template('marketplace.html', is_owner=is_owner)
 
 
 def main():

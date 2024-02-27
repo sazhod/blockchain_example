@@ -3,30 +3,10 @@
 {% block content %}
     {{ super() }}
     {% if session['public_key'] %}
-        <button id='connectWallet' onclick="signout()">Change Wallet</button>
 
     {% else %}
-    <button id='connectWallet' onclick="signout()">Connect Wallet</button>
+
     <p>Авторизуйтесь чтобы просматривать баланс</p>
     {% endif %}
-    <script>
-        function signout() {
-            if (window.ethereum) {
-              window.ethereum
-                .request({
-                  method: "wallet_requestPermissions",
-                  params: [
-                    {
-                      eth_accounts: {},
-                    },
-                  ],
-                })
-                .then(() => {
-                    public_key = window.ethereum.selectedAddress;
-                    var base_url = window.location.origin;
-                    window.location.replace(base_url + "/?public_key="+public_key);
-                });
-            }
-          }
-    </script>
+    
 {% endblock %}

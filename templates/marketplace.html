@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if is_owner %}
+        <p>Владелец</p>
+    {% elif session['public_key'] %}
+        <p>Авторизованный</p>
+    {% else %}
+        <p>Не авторизованный</p>
+    {% endif %}
+{% endblock %}
