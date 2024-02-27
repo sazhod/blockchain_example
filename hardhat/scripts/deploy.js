@@ -40,16 +40,18 @@ async function main1() {
   // console.log(her.ethers.)
   const token_contract = await hre.ethers.deployContract("TokenContract");
   console.log(token_contract)
-  console.log("Contract address");
 
-  const token_contract2 = await hre.ethers.deployContract("TokenContract2");
-  console.log(token_contract2);
-  console.log("Contract address");
+
+  console.log("__________________________");
+
+  const nft_contract = await hre.ethers.deployContract("NftContract");
+  console.log(nft_contract)
+
 }
 
 
-// main1().catch((error) => {
-//   console.error(error);
-//   process.exitCode = 1;
-// });
+main1().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
 

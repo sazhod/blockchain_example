@@ -51,13 +51,20 @@ contract TokenContract is Token {
     uint8 public decimals;                //How many decimals to show.
     string public symbol;                 //An identifier: eg SBX
 
+    address Tom = 0x6D0102592b1bB09D88f7eB910Ae5234Ba3861985;
+    address Max = 0x49DcB0339C7D3ECFa3cCFC217a064E954AFE8A0d;
+    address Jack = 0xE91F2Da19168a83CFa14c7d4422ff8f60fe330Cf;
+
     constructor() {
-        balances[msg.sender] = 300000;               // Give the creator all initial tokens
-        totalSupply = 300000;                        // Update total supply
-        name = "Professional";                                   // Set the name for display purposes
-        decimals = 6;                            // Amount of decimals for display purposes
-        symbol = "PROFI";                               // Set the symbol for display purposes
-        transfer(0x6D0102592b1bB09D88f7eB910Ae5234Ba3861985, 200000);
+        balances[msg.sender] = 1000000;
+        totalSupply = 1000000;
+        name = "Professional";
+        decimals = 6;
+        symbol = "PROFI";
+                                  
+        transfer(Tom, 200000);
+        transfer(Max, 300000);
+        transfer(Jack, 400000);
 
     }
 
