@@ -67,4 +67,8 @@ contract NftContract is ERC1155 {
         _mint(auctions[_auctionId].bigAddress, 1, 1, "");
         auctions[_auctionId].isEnded = true;
     }
+
+    function createNft(address to, uint id, uint amount, bytes memory metadata) public {
+        _mint(msg.sender, id, amount, "");
+    }
 }

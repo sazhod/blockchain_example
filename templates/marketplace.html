@@ -4,17 +4,35 @@
 
     {% if is_owner %}
         <p>Владелец</p>
-        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Default file input example</label>
-            <input class="form-control" type="file" id="formFile">
+        <div class="d-flex justify-content-center">
+
+        
+            <div class="card w-75 text-center ">
+                <div class="card-header">
+                    Добавление NFT
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="input-group mb-2">
+                            <input name="title" class="form-control" type="text" placeholder="Название" aria-label="title">
+                            <input name="description" class="form-control" type="text" placeholder="описание" aria-label="title">
+                        </div>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">PROFI</span>
+                            <input name="cost" type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-2">
+                            <label for="formFile" class="form-label"></label>
+                            <input name="image" class="form-control" type="file" id="formFile" accept="image/*">
+                        </div>
+                        
+                        <input name="count" class="form-control" type="number" placeholder="Количество" aria-label="Количество">
+
+                        <button type="submit" class="btn btn-primary mt-2">Добавить</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text">PROFI</span>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-            <span class="input-group-text">.00</span>
-        </div>
-        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
     {% elif session['public_key'] %}
         <p>Авторизованный</p>
     {% else %}
