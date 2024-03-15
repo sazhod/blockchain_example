@@ -10,10 +10,10 @@ BASE_URL = r'http://127.0.0.1:5000/'
 w3 = Web3(Web3.HTTPProvider(HARDHAT_URL))
 
 path_to_token_contract_json = r'hardhat/artifacts/contracts/TokenContract.sol/TokenContract.json'
-token_contract_address = '0xb409013acE408Bf661E232Fc181297371f45F633'
+token_contract_address = '0x1Bb0D62EDb8F68aD119b4fDd37C43C12364ad171'
 
 path_to_nft_contract_json = r'hardhat/artifacts/contracts/NftContract.sol/NftContract.json'
-nft_contract_address = '0xd5A48FAc93B8fec2A1c2aD81608e3681F5F0a3a6'
+nft_contract_address = '0x69f15Da87F215a04e3318FeE836A5026930af7D6'
 
 with open(path_to_token_contract_json) as file:
     token_contract_json = json.load(file)
@@ -62,14 +62,14 @@ def create_nft(contract, to, nft_id, amount, metadata):
     })
 
 
-def create_json_data_for_nft(title, description, image, cost, nft_id):
+def create_json_data_for_nft(name, description, image, cost, nft_id):
     data = {
-        'title': title,
+        'name': name,
         'description': description,
         'image': image,
         'cost':  cost
     }
-    with open(f'NFT/NFTS/{nft_id}.json', 'w') as file:
+    with open(f'NFT/NFTS/{nft_id}.json', 'w', encoding='utf-8') as file:
         json.dump(data, file)
     return json.dumps(data)
 

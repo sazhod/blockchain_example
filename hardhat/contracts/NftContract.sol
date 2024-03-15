@@ -69,6 +69,13 @@ contract NftContract is ERC1155 {
     }
 
     function createNft(address to, uint id, uint amount, bytes memory metadata) public {
-        _mint(msg.sender, id, amount, "");
+        _mint(msg.sender, id, amount, metadata);
     }
-}
+
+//     function uri(uint256 id) public override returns (string memory) {
+//         return super.uri(id);
+//     }
+
+//     receive() external payable {} // to support receiving ETH by default
+//     fallback() external payable {}
+// }

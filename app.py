@@ -63,9 +63,9 @@ def marketplace():
             cost = int(request.values.get('cost'))
             count = int(request.values.get('count'))
             data = create_json_data_for_nft(title, description, image_path, cost, nft_id)
-
+            metadata = '{"id": ' + str(nft_id) + '}'
             contract = get_nft_contract()
-            create_nft(contract, get_checksum_address(get_owner()), nft_id, count, data.encode('utf-8'))
+            create_nft(contract, get_checksum_address(get_owner()), nft_id, count, metadata.encode('utf-8'))
 
             # token_contract = get_token_contract()
             # from_address = get_checksum_address(get_owner())
